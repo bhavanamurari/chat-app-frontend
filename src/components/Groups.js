@@ -38,7 +38,7 @@ const Groups = () => {
 
       axios
         .get(
-          "https://vercel.com/bhavanas-projects-5b466d0f/chat-app-backend/chat/fetchGroups",
+          "https://chat-app-backend-eta-five.vercel.app/chat/fetchGroups",
           config
         )
         .then((response) => {
@@ -103,7 +103,7 @@ const Groups = () => {
                     },
                   };
                   axios.post(
-                    "https://vercel.com/bhavanas-projects-5b466d0f/chat-app-backend/chat/",
+                    "https://chat-app-backend-eta-five.vercel.app/chat/",
                     {
                       userId: group._id,
                     },

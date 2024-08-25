@@ -24,21 +24,17 @@ const Sidebar = () => {
   const [conversations, setConversations] = useState([]);
   const userData = JSON.parse(localStorage.getItem("userData"));
 
-  if (!userData) {
-    navigate("/");
-    return null;
-  }
-
+  
   useEffect(() => {
-    if (userData && userData.token) {
+    // Check if userData and token are available
+    if (userData?.token) {
       const config = {
         headers: { Authorization: `Bearer ${userData.token}` },
       };
+
+      // Perform the data fetching
       axios
-        .get(
-          "https://vercel.com/bhavanas-projects-5b466d0f/chat-app-backend/chat/",
-          config
-        )
+        .get("https://chat-app-backend-eta-five.vercel.app/chat/", config)
         .then((response) => {
           setConversations(response.data);
         })
@@ -46,7 +42,12 @@ const Sidebar = () => {
           console.error("Error fetching conversations:", error);
         });
     }
-  }, [refresh, userData]);
+  }, [refresh, userData]); 
+  
+  if (!userData) {
+    navigate("/");
+    return null;
+  }
 
   const filteredConversations = conversations.filter(
     (convo) => convo.users.length > 1

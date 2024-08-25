@@ -11,8 +11,7 @@ import axios from "axios";
 import { myContext } from "./MainContainer";
 import  io  from "socket.io-client";
 
-const ENDPOINT =
-  "https://vercel.com/bhavanas-projects-5b466d0f/chat-app-backend";
+const ENDPOINT = "https://chat-app-backend-eta-five.vercel.app/";
 
 const ChatArea = () => {
   const navigate = useNavigate();
@@ -23,17 +22,17 @@ const ChatArea = () => {
   const [chat_id, chat_user] = dyParams._id.split("&");
   const userData = JSON.parse(localStorage.getItem("userData"));
   const [allMessages, setAllMessages] = useState([]);
-   const [allMessagesCopy, setAllMessagesCopy] = useState([]);
+  const [allMessagesCopy, setAllMessagesCopy] = useState([]);
   const { refresh, setRefresh } = useContext(myContext);
   const [loaded, setloaded] = useState(false);
   const [socketConnectionStatus, setSocketConnectionStatus] = useState(false);
-const socket = io(ENDPOINT);
-    useEffect(() => {
-      socket.emit("setup", userData);
-      socket.on("connection", () => {
-        setSocketConnectionStatus(!socketConnectionStatus);
-      });
-    }, []);
+  const socket = io(ENDPOINT);
+  useEffect(() => {
+    socket.emit("setup", userData);
+    socket.on("connection", () => {
+      setSocketConnectionStatus(!socketConnectionStatus);
+    });
+  }, []);
 
   const sendMessage = () => {
     // console.log("SendMessage Fired to", chat_id._id);
@@ -44,7 +43,7 @@ const socket = io(ENDPOINT);
     };
     axios
       .post(
-        "https://vercel.com/bhavanas-projects-5b466d0f/chat-app-backend/message/",
+        "https://chat-app-backend-eta-five.vercel.app/message/",
         {
           content: messageContent,
           chatId: chat_id,
@@ -59,23 +58,22 @@ const socket = io(ENDPOINT);
       .catch((error) => {
         console.error("Error sending message:", error);
       });
-
   };
   // const scrollToBottom = () => {
   //   messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   // };
-//connect to socket
+  //connect to socket
 
   //new message received
   useEffect(() => {
     socket.on("message received", (newMessage) => {
       if (!allMessagesCopy || allMessagesCopy._id !== newMessage._id) {
-      //setAllMessages([...allMessages], newMessage);
+        //setAllMessages([...allMessages], newMessage);
       } else {
         setAllMessages([...allMessages], newMessage);
-    }
-  })
-})
+      }
+    });
+  });
 
   //fetch Chats
   useEffect(() => {
@@ -86,8 +84,7 @@ const socket = io(ENDPOINT);
     };
     axios
       .get(
-        "https://vercel.com/bhavanas-projects-5b466d0f/chat-app-backend/message/" +
-          chat_id,
+        "https://chat-app-backend-eta-five.vercel.app/message/" + chat_id,
         config
       )
       .then(({ data }) => {
@@ -98,26 +95,26 @@ const socket = io(ENDPOINT);
       });
     setAllMessagesCopy(allMessages);
   }, [refresh, chat_id, userData.token, allMessages]);
- const deleteChat = () => {
-   const config = {
-     headers: {
-       Authorization: `Bearer ${userData.token}`,
-     },
-   };
-   axios
-     .delete(
-       `https://vercel.com/bhavanas-projects-5b466d0f/chat-app-backend/chat/${chat_id}`,
-       config
-     )
-     .then(() => {
-       console.log("Chat deleted");
-       setAllMessages([]);
-       navigate(-1); // Navigate to another route, e.g., home
-     })
-     .catch((error) => {
-       console.error("Error deleting chat:", error);
-     });
- };
+  const deleteChat = () => {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${userData.token}`,
+      },
+    };
+    axios
+      .delete(
+        `https://chat-app-backend-eta-five.vercel.app/chat/${chat_id}`,
+        config
+      )
+      .then(() => {
+        console.log("Chat deleted");
+        setAllMessages([]);
+        navigate(-1); // Navigate to another route, e.g., home
+      })
+      .catch((error) => {
+        console.error("Error deleting chat:", error);
+      });
+  };
 
   // useEffect(() => {
   //   console.log("Users refreshed");
@@ -127,7 +124,7 @@ const socket = io(ENDPOINT);
   //     },
   //   };
   //   axios
-  //     .get("http://localhost:8080/message/" + chat_id, config)
+  //     .get("https://chat-app-backend-eta-five.vercel.app/message/" + chat_id, config)
   //     .then(({ data }) => {
   //       setAllMessages(data);
   //       setloaded(true);

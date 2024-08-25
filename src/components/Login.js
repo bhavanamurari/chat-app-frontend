@@ -29,7 +29,7 @@ const Login = () => {
         },
       };
       const response = await axios.post(
-        "https://vercel.com/bhavanas-projects-5b466d0f/chat-app-backend/user/login",
+        "https://chat-app-backend-eta-five.vercel.app/user/login",
         data,
         config
       );
@@ -67,7 +67,7 @@ const Login = () => {
         },
       };
       const response = await axios.post(
-        "https://vercel.com/bhavanas-projects-5b466d0f/chat-app-backend/user/register",
+        "https://chat-app-backend-eta-five.vercel.app/user/register",
         data,
         config
       );

@@ -40,7 +40,7 @@ const Users = () => {
       };
       axios
         .get(
-          "https://vercel.com/bhavanas-projects-5b466d0f/chat-app-backend/user/fetchUsers",
+          "https://chat-app-backend-eta-five.vercel.app/user/fetchUsers",
           config
         )
         .then((data) => {
@@ -111,7 +111,7 @@ const Users = () => {
                   };
                   axios
                     .post(
-                      "https://vercel.com/bhavanas-projects-5b466d0f/chat-app-backend/chat/",
+                      "https://chat-app-backend-eta-five.vercel.app/chat/",
                       {
                         userId: user._id,
                       },

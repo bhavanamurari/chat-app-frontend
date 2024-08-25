@@ -2,7 +2,7 @@
   "name": "frontend",
   "version": "0.1.0",
   "private": true,
-  "proxy": "https://vercel.com/bhavanas-projects-5b466d0f/chat-app-backend",
+  "proxy": "https://chat-app-backend-eta-five.vercel.app/",
   "dependencies": {
     "@emotion/react": "^11.13.0",
     "@emotion/styled": "^11.13.0",
